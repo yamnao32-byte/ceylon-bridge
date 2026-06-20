@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>セイロン・ブリッジ | IT高度人材・技能実習・特定技能・スリランカ進出支援</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+Sinhala:wght@300;400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary:       #0052A5;
+      --primary-dark:  #003d7a;
+      --orange:        #FF6B00;
+      --green:         #00A550;
+      --gold:          #F4B942;
+      --dark:          #1A1A2E;
+      --gray:          #6B7280;
+      --light:         #F3F4F6;
+      --white:         #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Segoe UI', sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,.07);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--orange), var(--gold));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .logo-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      color: var(--gray);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .desktop-nav a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark);
+      transition: color .2s;
+    }
+
+    .desktop-nav a:hover { color: var(--primary); }
+
+    .nav-cta {
+      background: var(--orange);
+      color: var(--white) !important;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background .2s, transform .2s, box-shadow .2s !important;
+    }
+
+    .nav-cta:hover {
+      background: #d95e00 !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(255,107,0,.35);
+    }
+
+    .header-right { display: flex; align-items: center; gap: 14px; }
+
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      background: var(--light);
+      padding: 4px;
+      border-radius: 8px;
+    }
+
+    .lang-btn {
+      padding: 4px 10px;
+      border: none;
+      background: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--gray);
+      transition: all .2s;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .lang-btn.active {
+      background: var(--white);
+      color: var(--primary);
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      padding: 20px 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+      z-index: 999;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mobile-nav.open { display: flex; }
+
+    .mobile-nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 16px;
+      font-weight: 500;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--light);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0052A5 0%, #003d7a 45%, #1a1a4e 100%);
+      display: flex;
+      align-items: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -15%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(244,185,66,.14) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0,165,80,.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(244,185,66,.18);
+      border: 1px solid rgba(244,185,66,.4);
+      color: var(--gold);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 3.5vw, 52px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .hl { color: var(--gold); }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,.8);
+      margin-bottom: 40px;
+      line-height: 1.75;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .3s;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary:hover {
+      background: #d95e00;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,107,0,.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .3s;
+      border: 2px solid rgba(255,255,255,.4);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,.1);
+      border-color: var(--white);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flags-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .flag-card {
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px;
+      padding: 28px 44px;
+      text-align: center;
+      width: 260px;
+      transition: transform .3s;
+    }
+
+    .flag-card:hover { transform: scale(1.04); }
+
+    .flag-emoji { font-size: 64px; margin-bottom: 10px; display: block; }
+
+    .flag-label { color: rgba(255,255,255,.95); font-size: 18px; font-weight: 700; }
+
+    .flag-sublabel { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 4px; }
+
+    .bridge-arrow {
+      font-size: 32px;
+      color: var(--gold);
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.45);
+      font-size: 11px;
+      letter-spacing: .05em;
+      opacity: 0;
+      animation: fadeUp .8s ease 1.2s forwards;
+    }
+
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-radius: 11px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 5px;
+    }
+
+    .scroll-mouse::after {
+      content: '';
+      width: 3px;
+      height: 7px;
+      background: rgba(255,255,255,.5);
+      border-radius: 2px;
+      animation: scrollDown 2s ease infinite;
+    }
+
+    @keyframes scrollDown {
+      0%   { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(12px); opacity: 0; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translate(-50%, 10px); }
+      to   { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* ── STATS ── */
+    .stats-bar {
+      background: var(--white);
+      padding: 56px 24px;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .stats-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1;
+    }
+
+    .stat-num sup { font-size: 22px; }
+
+    .stat-lbl {
+      font-size: 14px;
+      color: var(--gray);
+      margin-top: 8px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 24px; }
+
+    .inner { max-width: 1200px; margin: 0 auto; }
+
+    .sec-tag {
+      display: inline-block;
+      background: rgba(0,82,165,.08);
+      color: var(--primary);
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .sec-title {
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .sec-desc {
+      font-size: 17px;
+      color: var(--gray);
+      line-height: 1.75;
+      max-width: 580px;
+    }
+
+    .sec-header { margin-bottom: 64px; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--light); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .svc-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px;
+      transition: transform .3s, box-shadow .3s;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent, var(--primary));
+    }
+
+    .svc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.09);
+      border-color: rgba(0,82,165,.08);
+    }
+
+    .svc-card.it     { --accent: #0052A5; }
+    .svc-card.intern { --accent: #00A550; }
+    .svc-card.skill  { --accent: #FF6B00; }
+    .svc-card.biz    { --accent: #F4B942; }
+
+    .svc-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-bottom: 24px;
+    }
+
+    .svc-card.it     .svc-icon { background: rgba(0,82,165,.1); }
+    .svc-card.intern .svc-icon { background: rgba(0,165,80,.1); }
+    .svc-card.skill  .svc-icon { background: rgba(255,107,0,.1); }
+    .svc-card.biz    .svc-icon { background: rgba(244,185,66,.15); }
+
+    .svc-card h3 { font-size: 21px; font-weight: 700; margin-bottom: 12px; }
+
+    .svc-card p  { color: var(--gray); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag {
+      background: var(--light);
+      color: var(--dark);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ── WHY SRI LANKA ── */
+    .why { background: var(--white); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-visual {
+      background: linear-gradient(135deg, #8D153A 0%, #2a1a1a 50%, #004d00 100%);
+      border-radius: 24px;
+      padding: 56px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-visual::after {
+      content: '🦁';
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 44px;
+      opacity: .2;
+    }
+
+    .big-flag { font-size: 90px; margin-bottom: 16px; display: block; }
+
+    .why-visual h3 { color: var(--white); font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+
+    .why-visual p  { color: rgba(255,255,255,.65); font-size: 13px; }
+
+    .why-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .why-mini {
+      background: rgba(255,255,255,.1);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .why-mini .n { color: var(--gold); font-size: 24px; font-weight: 700; font-family: 'Inter', sans-serif; }
+
+    .why-mini .l { color: rgba(255,255,255,.75); font-size: 11px; margin-top: 3px; }
+
+    .reasons { display: flex; flex-direction: column; gap: 22px; }
+
+    .reason {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .reason-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .reason-body h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+
+    .reason-body p  { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* ── PROCESS ── */
+    .process { background: linear-gradient(135deg, #f8f9ff 0%, #fff7f0 100%); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 35px;
+      left: calc(10% + 8px);
+      right: calc(10% + 8px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--orange));
+      z-index: 0;
+    }
+
+    .step { text-align: center; position: relative; z-index: 1; }
+
+    .step-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 16px rgba(0,82,165,.18);
+      transition: all .3s;
+      position: relative;
+    }
+
+    .step-circle:hover {
+      background: var(--primary);
+      transform: scale(1.1);
+    }
+
+    .step-n {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+    .step p  { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+    /* ── TESTIMONIALS ── */
+    .testi { background: var(--light); }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testi-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 28px;
+      position: relative;
+    }
+
+    .testi-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 64px;
+      color: var(--light);
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .stars { color: var(--gold); font-size: 15px; margin-bottom: 12px; }
+
+    .testi-text { font-size: 14px; line-height: 1.75; color: var(--gray); margin-bottom: 20px; }
+
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 18px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .author-name { font-size: 14px; font-weight: 700; }
+
+    .author-co   { font-size: 12px; color: var(--gray); }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info h3 { font-size: 24px; font-weight: 700; margin-bottom: 14px; }
+
+    .contact-info p  { color: var(--gray); font-size: 15px; line-height: 1.75; margin-bottom: 32px; }
+
+    .c-items { display: flex; flex-direction: column; gap: 14px; }
+
+    .c-item { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+
+    .c-item-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-form-wrap {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 40px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      background: var(--white);
+      color: var(--dark);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0,82,165,.1);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,82,165,.3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,.65);
+      padding: 64px 24px 28px;
+    }
+
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .logo-name { color: var(--white); font-size: 17px; }
+
+    .footer-brand .logo-sub  { color: rgba(255,255,255,.45); }
+
+    .footer-brand p { font-size: 14px; line-height: 1.75; margin-top: 14px; color: rgba(255,255,255,.55); }
+
+    .footer-col h4 { color: var(--white); font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-col ul a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 14px; transition: color .2s; }
+
+    .footer-col ul a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      .steps::before { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+      .hamburger { display: flex; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+  HEADER
+============================================================ -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🌏</div>
+      <div>
+        <div class="logo-name"
+          data-ja="セイロン・ブリッジ株式会社"
+          data-en="Ceylon Bridge Co., Ltd."
+          data-si="සීලෝන් බ්‍රිජ් සමාගම">セイロン・ブリッジ株式会社</div>
+        <div class="logo-sub">Ceylon Bridge Co., Ltd.</div>
+      </div>
+    </a>
+
+    <nav class="desktop-nav">
+      <a href="#services" data-ja="サービス"       data-en="Services"        data-si="සේවාවන්">サービス</a>
+      <a href="#why"      data-ja="どうしてスリランカ？" data-en="Why Sri Lanka?"   data-si="ඇයි ශ්‍රී ලංකාව?">なぜスリランカ？</a>
+      <a href="#process"  data-ja="導入の流れ"      data-en="Process"          data-si="ක්‍රියාවලිය">導入の流れ</a>
+      <a href="#contact"  class="nav-cta"
+         data-ja="無料相談" data-en="Free Consult" data-si="නොමිලේ උපදේශනය">無料相談</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('ja',this)">JP</button>
+        <button class="lang-btn"        onclick="setLang('en',this)">EN</button>
+        <button class="lang-btn"        onclick="setLang('si',this)">සිං</button>
+      </div>
+      <button class="hamburger" onclick="toggleMob()" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobNav">
+  <a href="#services" onclick="toggleMob()" data-ja="サービス"       data-en="Services"       data-si="සේවාවන්">サービス</a>
+  <a href="#why"      onclick="toggleMob()" data-ja="なぜスリランカ？" data-en="Why Sri Lanka?"  data-si="ඇයි ශ්‍රී ලංකාව?">なぜスリランカ？</a>
+  <a href="#process"  onclick="toggleMob()" data-ja="導入の流れ"      data-en="Process"         data-si="ක්‍රියාවලිය">導入の流れ</a>
+  <a href="#contact"  onclick="toggleMob()" data-ja="お問い合わせ"    data-en="Contact"         data-si="අප හා සම්බන්ධ වන්න">お問い合わせ</a>
+</div>
+
+<!-- ============================================================
+  HERO
+============================================================ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        🇱🇰 × 🇯🇵
+        <span data-ja="スリランカ×日本 人材ブリッジ"
+              data-en="Sri Lanka × Japan Talent Bridge"
+              data-si="ශ්‍රී ලංකාව × ජපානය ශ්‍රම橋">スリランカ×日本 人材ブリッジ</span>
+      </div>
+
+      <h1>
+        <span data-ja="スリランカの<br><span class='hl'>優秀な人材</span>で<br>貴社の未来を切り拓く"
+              data-en="Unlock Your Business<br>Potential with<br><span class='hl'>Top Sri Lankan Talent</span>"
+              data-si="ශ්‍රී ලංකාවේ <span class='hl'>දක්ෂ ශ්‍රමිකයන්</span><br>සමඟ ඔබේ ව්‍යාපාරය<br>ශක්තිමත් කරන්න">スリランカの<br><span class="hl">優秀な人材</span>で<br>貴社の未来を切り拓く</span>
+      </h1>
+
+      <p class="hero-desc"
+         data-ja="IT高度人材・技能実習生・特定技能を専門にスリランカ人材を日本企業へご紹介。さらに、日本企業のスリランカ進出支援も行っています。"
+         data-en="We specialize in connecting Japanese companies with top Sri Lankan talent — IT professionals, Technical Intern Trainees, and Specified Skilled Workers. We also support Japanese businesses expanding into Sri Lanka."
+         data-si="IT වෘත්තිකයන්, ශිල්ප පුහුණු සහ නිශ්චිත කුසලතා ශ්‍රමිකයන් ජපාන සමාගම් සමඟ සම්බන්ධ කිරීමේ විශේෂඥයෝ. ශ්‍රී ලංකාවේ ව්‍යාපාර ව්‍යාප්තිය සඳහා ද සහාය දක්වමු.">IT高度人材・技能実習生・特定技能を専門にスリランカ人材を日本企業へご紹介。さらに、日本企業のスリランカ進出支援も行っています。</p>
+
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary"
+           data-ja="無料相談を申し込む →"
+           data-en="Get Free Consultation →"
+           data-si="නොමිලේ උපදේශනයක් →">無料相談を申し込む →</a>
+        <a href="#services" class="btn-outline"
+           data-ja="サービスを見る"
+           data-en="View Services"
+           data-si="සේවාවන් බලන්න">サービスを見る</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="flags-wrap">
+        <div class="flag-card">
+          <span class="flag-emoji">🇱🇰</span>
+          <div class="flag-label">Sri Lanka</div>
+          <div class="flag-sublabel">ශ්‍රී ලංකාව · スリランカ</div>
+        </div>
+        <div class="bridge-arrow">⇅</div>
+        <div class="flag-card">
+          <span class="flag-emoji">🇯🇵</span>
+          <div class="flag-label">Japan</div>
+          <div class="flag-sublabel">日本 · Nihon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-mouse"></div>
+    <span data-ja="スクロール" data-en="Scroll" data-si="යට බලන්න">スクロール</span>
+  </div>
+</section>
+
+<!-- ============================================================
+  STATS
+============================================================ -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="reveal">
+      <div class="stat-num" data-target="500">0<sup>+</sup></div>
+      <div class="stat-lbl" data-ja="紹介実績（人）" data-en="Placements" data-si="ස්ථාපනයන්">紹介実績（人）</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num" data-target="120">0<sup>+</sup></div>
+      <div class="stat-lbl" data-ja="取引企業数" data-en="Partner Companies" data-si="හවුල් සමාගම්">取引企業数</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num" data-target="98">0<sup>%</sup></div>
+      <div class="stat-lbl" data-ja="顧客満足度" data-en="Client Satisfaction" data-si="සේවාලාභී තෘප්තිය">顧客満足度</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num" data-target="5">0<sup>年+</sup></div>
+      <div class="stat-lbl" data-ja="業界経験" data-en="Years of Experience" data-si="වසර අත්දැකීම">業界経験</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+  SERVICES
+============================================================ -->
+<section class="services" id="services">
+  <div class="inner">
+    <div class="sec-header">
+      <div class="sec-tag" data-ja="サービス一覧" data-en="Our Services" data-si="අපගේ සේවාවන්">サービス一覧</div>
+      <h2 class="sec-title" data-ja="スリランカ人材に特化した<br>4つのサービス" data-en="4 Services Specialized<br>in Sri Lankan Talent" data-si="ශ්‍රී ලංකා ශ්‍රමිකයන්ට<br>විශේෂිත සේවාවන් 4ක්">スリランカ人材に特化した<br>4つのサービス</h2>
+      <p class="sec-desc"
+         data-ja="貴社のニーズに合わせた最適なスリランカ人材をご提供します。採用から定着支援まで、ワンストップでサポートします。"
+         data-en="We provide the best Sri Lankan talent tailored to your company's needs — from recruitment to long-term retention, all in one place."
+         data-si="ඔබේ සමාගමේ අවශ්‍යතාවලට ගැළපෙන හොඳම ශ්‍රී ලංකා ශ්‍රමිකයන් සපයමු. බඳවා ගැනීමේ සිට රඳවා ගැනීම දක්වා.">貴社のニーズに合わせた最適なスリランカ人材をご提供します。採用から定着支援まで、ワンストップでサポートします。</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- IT -->
+      <div class="svc-card it reveal">
+        <div class="svc-icon">💻</div>
+        <h3 data-ja="IT高度人材紹介" data-en="IT Professional Placement" data-si="IT වෘත්තිකයන් ස්ථාපනය">IT高度人材紹介</h3>
+        <p  data-ja="スリランカは高い英語力とIT教育水準を誇り、優秀なエンジニアが豊富です。ソフトウェア開発・AI・データサイエンスなど、多岐にわたるITポジションに対応します。"
+            data-en="Sri Lanka boasts high English proficiency and top-tier IT education, producing excellent engineers. We cover software development, AI, data science, and more."
+            data-si="ශ්‍රී ලංකාව ඉහළ ඉංග්‍රීසි හැකියාව සහ IT අධ්‍යාපනය සඳහා ප්‍රසිද්ධ ය. Software, AI, Data Science ඇතුළු ක්ෂේත්‍ර ආවරණය කෙරේ.">スリランカは高い英語力とIT教育水準を誇り、優秀なエンジニアが豊富です。ソフトウェア開発・AI・データサイエンスなど、多岐にわたるITポジションに対応します。</p>
+        <div class="tags">
+          <span class="tag">ソフトウェアエンジニア</span>
+          <span class="tag">AI / ML</span>
+          <span class="tag">データサイエンス</span>
+          <span class="tag">クラウド</span>
+        </div>
+      </div>
+
+      <!-- 技能実習 -->
+      <div class="svc-card intern reveal">
+        <div class="svc-icon">🎓</div>
+        <h3 data-ja="技能実習生紹介" data-en="Technical Intern Trainees" data-si="ශිල්ප පුහුණු ශ්‍රමිකයන්">技能実習生紹介</h3>
+        <p  data-ja="スリランカ人は勤勉・礼儀正しく、日本の職場環境への適応力が高いと評判です。製造業・建設・農業・食品加工など幅広い業種に対応しています。"
+            data-en="Sri Lankans are known for diligence, politeness, and adaptability to Japanese work environments. We cover manufacturing, construction, agriculture, food processing, and more."
+            data-si="ශ්‍රී ලාංකිකයෝ ශ්‍රමශීලී, කාරුණික සහ ජපාන කාර්ය ස්ථාන පරිසරයට අනුවර්තනය වීමේ හැකියාව ඉහළ ය.">スリランカ人は勤勉・礼儀正しく、日本の職場環境への適応力が高いと評判です。製造業・建設・農業・食品加工など幅広い業種に対応しています。</p>
+        <div class="tags">
+          <span class="tag">製造業</span>
+          <span class="tag">建設</span>
+          <span class="tag">農業</span>
+          <span class="tag">食品加工</span>
+        </div>
+      </div>
+
+      <!-- 特定技能 -->
+      <div class="svc-card skill reveal">
+        <div class="svc-icon">⚙️</div>
+        <h3 data-ja="特定技能人材紹介" data-en="Specified Skilled Workers" data-si="නිශ්චිත කුසලතා ශ්‍රමිකයන්">特定技能人材紹介</h3>
+        <p  data-ja="特定技能1号・2号に対応。即戦力となる人材をご紹介します。ビザ申請から生活支援まで、採用後のフォローアップも万全です。"
+            data-en="We support Specified Skilled Worker Type 1 and Type 2. We introduce job-ready talent and provide full support from visa applications to daily life assistance."
+            data-si="නිශ්චිත කුසල ශ්‍රමිකයෙකු 1 සහ 2 සඳහා සහාය. වීසා ඉල්ලීම් සිට ජීවන සහාය දක්වා සම්පූර්ණ සහාය.">特定技能1号・2号に対応。即戦力となる人材をご紹介します。ビザ申請から生活支援まで、採用後のフォローアップも万全です。</p>
+        <div class="tags">
+          <span class="tag">特定技能1号</span>
+          <span class="tag">特定技能2号</span>
+          <span class="tag">ビザサポート</span>
+          <span class="tag">生活支援</span>
+        </div>
+      </div>
+
+      <!-- 進出支援 -->
+      <div class="svc-card biz reveal">
+        <div class="svc-icon">🌏</div>
+        <h3 data-ja="スリランカ進出支援" data-en="Business Expansion Support" data-si="ව්‍යාපාර ව්‍යාප්ති සහාය">スリランカ進出支援</h3>
+        <p  data-ja="日本企業のスリランカへの事業進出をトータルサポート。現地法人設立・市場調査・パートナー探し・採用支援まで、現地ネットワークを活かして伴走します。"
+            data-en="We provide comprehensive support for Japanese companies expanding into Sri Lanka — local entity setup, market research, partner introductions, and talent acquisition."
+            data-si="ශ්‍රී ලංකාවේ ව්‍යාපාර ස්ථාපනය, වෙළෙඳ පොළ පර්යේෂණ, දේශීය හවුල්කරුවන් සෙවීම සහ ශ්‍රම සඳහා සම්පූර්ණ සහාය.">日本企業のスリランカへの事業進出をトータルサポート。現地法人設立・市場調査・パートナー探し・採用支援まで、現地ネットワークを活かして伴走します。</p>
+        <div class="tags">
+          <span class="tag">現地法人設立</span>
+          <span class="tag">市場調査</span>
+          <span class="tag">パートナー探し</span>
+          <span class="tag">採用支援</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  WHY SRI LANKA
+============================================================ -->
+<section class="why" id="why">
+  <div class="inner">
+    <div class="why-grid">
+      <div class="why-visual reveal">
+        <span class="big-flag">🇱🇰</span>
+        <h3 data-ja="スリランカ" data-en="Sri Lanka" data-si="ශ්‍රී ලංකාව">スリランカ</h3>
+        <p  data-ja="インド洋の真珠" data-en="Pearl of the Indian Ocean" data-si="ඉන්දීය සාගරයේ මිණිය">インド洋の真珠</p>
+        <div class="why-mini-grid">
+          <div class="why-mini">
+            <div class="n">92%</div>
+            <div class="l" data-ja="識字率" data-en="Literacy Rate" data-si="සාක්ෂරතාව">識字率</div>
+          </div>
+          <div class="why-mini">
+            <div class="n">2,200万</div>
+            <div class="l" data-ja="人口" data-en="Population" data-si="ජනගහනය">人口</div>
+          </div>
+          <div class="why-mini">
+            <div class="n">Top 5</div>
+            <div class="l" data-ja="アジア英語力" data-en="English in Asia" data-si="ආසියා ඉංග්‍රීසි">アジア英語力</div>
+          </div>
+          <div class="why-mini">
+            <div class="n">親日</div>
+            <div class="l" data-ja="高い親日感情" data-en="Pro-Japan Sentiment" data-si="ජපාන හිතකාමී">高い親日感情</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-tag" data-ja="なぜスリランカ？" data-en="Why Sri Lanka?" data-si="ඇයි ශ්‍රී ලංකාව?">なぜスリランカ？</div>
+        <h2 class="sec-title" data-ja="スリランカ人材が<br>選ばれる6つの理由" data-en="6 Reasons Why Sri Lankan<br>Talent Stands Out" data-si="ශ්‍රී ලංකා ශ්‍රමිකයන් තෝරා ගැනීමට<br>හේතු 6ක්">スリランカ人材が<br>選ばれる6つの理由</h2>
+
+        <div class="reasons">
+          <div class="reason reveal">
+            <div class="reason-icon">🎓</div>
+            <div class="reason-body">
+              <h4 data-ja="高い教育水準" data-en="High Education Standards" data-si="ඉහළ අධ්‍යාපන ප්‍රමිතීන්">高い教育水準</h4>
+              <p  data-ja="大学進学率はアジアトップクラス。理工系人材も豊富です。" data-en="University enrollment is among Asia's highest, with abundant STEM talent." data-si="ආසියාවේ ඉහළම විශ්වවිද්‍යාල ඇතුළත්වීමේ අනුපාතය. STEM ශ්‍රමිකයන් ද බහුල ය.">大学進学率はアジアトップクラス。理工系人材も豊富です。</p>
+            </div>
+          </div>
+          <div class="reason reveal">
+            <div class="reason-icon">🗣️</div>
+            <div class="reason-body">
+              <h4 data-ja="高い英語力" data-en="Strong English Proficiency" data-si="ශක්තිමත් ඉංග්‍රීසි හැකියාව">高い英語力</h4>
+              <p  data-ja="英語は公用語のひとつ。ビジネスコミュニケーションにおいても高い能力を持ちます。" data-en="English is an official language, ensuring strong business communication skills." data-si="ඉංග්‍රීසි නිල භාෂාවකි. ව්‍යාපාරික සන්නිවේදනයේ ශක්තිමත් හැකියාවක් ඇත.">英語は公用語のひとつ。ビジネスコミュニケーションにおいても高い能力を持ちます。</p>
+            </div>
+          </div>
+          <div class="reason reveal">
+            <div class="reason-icon">💪</div>
+            <div class="reason-body">
+              <h4 data-ja="勤勉さと誠実さ" data-en="Diligence & Integrity" data-si="ශ්‍රමශීලිත්වය සහ අවංකත්වය">勤勉さと誠実さ</h4>
+              <p  data-ja="仏教文化に根ざし、勤勉・誠実・礼儀正しさが高く評価されています。" data-en="Rooted in Buddhist culture, Sri Lankans are highly regarded for diligence, integrity, and politeness." data-si="බෞද්ධ සංස්කෘතිය මත ශ්‍රමශීලිත්වය, අවංකත්වය, කාරුණිකත්වය ඉහළ ය.">仏教文化に根ざし、勤勉・誠実・礼儀正しさが高く評価されています。</p>
+            </div>
+          </div>
+          <div class="reason reveal">
+            <div class="reason-icon">💻</div>
+            <div class="reason-body">
+              <h4 data-ja="IT親和性の高さ" data-en="Strong IT Affinity" data-si="ශක්තිමත් IT සාක්ෂරතාව">IT親和性の高さ</h4>
+              <p  data-ja="政府主導のIT教育推進により、若い世代を中心に優秀なIT人材が育っています。" data-en="Government-led IT education initiatives have cultivated a strong pool of young IT professionals." data-si="රජය ප්‍රමුඛ IT අධ්‍යාපනය නිසා දක්ෂ IT වෘත්තිකයන් බිහිව ඇත.">政府主導のIT教育推進により、若い世代を中心に優秀なIT人材が育っています。</p>
+            </div>
+          </div>
+          <div class="reason reveal">
+            <div class="reason-icon">❤️</div>
+            <div class="reason-body">
+              <h4 data-ja="高い親日感情" data-en="Strong Pro-Japan Sentiment" data-si="ජපාන හිතකාමී ජාතිය">高い親日感情</h4>
+              <p  data-ja="スリランカは歴史的に日本と良好な関係を持つ親日国。日本文化への理解・関心が高いです。" data-en="Sri Lanka has historically maintained excellent relations with Japan, with strong interest in Japanese culture." data-si="ශ්‍රී ලංකාව ජපානය සමඟ ඓතිහාසිකව හොඳ සබඳතා ඇත. ජපාන සංස්කෘතිය කෙෙ‍රෙහිි ඉහළ ඇල්මක් ඇත.">スリランカは歴史的に日本と良好な関係を持つ親日国。日本文化への理解・関心が高いです。</p>
+            </div>
+          </div>
+          <div class="reason reveal">
+            <div class="reason-icon">💰</div>
+            <div class="reason-body">
+              <h4 data-ja="コストパフォーマンス" data-en="Cost Effectiveness" data-si="වියදම් කාර්යක්ෂමතාව">コストパフォーマンス</h4>
+              <p  data-ja="高いスキルを持ちながら、他のアジア諸国と比べてコスト競争力があります。" data-en="High-skilled talent at competitive costs compared to other Asian countries." data-si="ශ්‍රී ලංකා ශ්‍රමිකයෝ ඉහළ කුසලතා සඳහා ඉතා ලාභදායී ය.">高いスキルを持ちながら、他のアジア諸国と比べてコスト競争力があります。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  PROCESS
+============================================================ -->
+<section class="process" id="process">
+  <div class="inner">
+    <div class="sec-header" style="text-align:center;">
+      <div class="sec-tag" data-ja="導入の流れ" data-en="How It Works" data-si="ක්‍රියාවලිය">導入の流れ</div>
+      <h2 class="sec-title" data-ja="ご利用の流れ" data-en="Our Process" data-si="අපගේ ක්‍රියාවලිය">ご利用の流れ</h2>
+      <p class="sec-desc" style="margin:0 auto;"
+         data-ja="お問い合わせから採用まで、スムーズにサポートします。"
+         data-en="We guide you smoothly from first inquiry all the way to successful hiring."
+         data-si="ඉල්ලීමේ සිට බඳවා ගැනීම දක්වා සුමටව සහාය ලබා දෙමු.">お問い合わせから採用まで、スムーズにサポートします。</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-circle">
+          <span class="step-n">1</span>📞
+        </div>
+        <h4 data-ja="ご相談・ヒアリング" data-en="Initial Consultation" data-si="පළමු උපදේශනය">ご相談・ヒアリング</h4>
+        <p  data-ja="採用ニーズや条件をヒアリングします" data-en="We listen to your hiring needs" data-si="ඔබේ අවශ්‍යතා අවබෝධ කර ගනිමු">採用ニーズや条件をヒアリングします</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-circle">
+          <span class="step-n">2</span>🔍
+        </div>
+        <h4 data-ja="候補者選定" data-en="Candidate Screening" data-si="අපේක්ෂකයන් ශ්‍රේණිගත කිරීම">候補者選定</h4>
+        <p  data-ja="最適な候補者をスクリーニング" data-en="We screen the best candidates" data-si="හොඳම අපේක්ෂකයන් ශ්‍රේණිගත කිරීම">最適な候補者をスクリーニング</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-circle">
+          <span class="step-n">3</span>🤝
+        </div>
+        <h4 data-ja="面接サポート" data-en="Interview Support" data-si="සම්මුඛ සාකච්ඡා සහාය">面接サポート</h4>
+        <p  data-ja="オンライン面接の調整と通訳サポート" data-en="Online interview coordination & interpretation" data-si="සම්මුඛ සාකච්ඡා සහ පරිවර්තන සහාය">オンライン面接の調整と通訳サポート</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-circle">
+          <span class="step-n">4</span>📋
+        </div>
+        <h4 data-ja="ビザ・入国手続き" data-en="Visa & Entry Procedures" data-si="වීසා ක්‍රියාවලිය">ビザ・入国手続き</h4>
+        <p  data-ja="ビザ申請から入国まで全面サポート" data-en="Full support from visa to arrival" data-si="වීසා සිට ලිපිනය දක්වා සහාය">ビザ申請から入国まで全面サポート</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-circle">
+          <span class="step-n">5</span>🏠
+        </div>
+        <h4 data-ja="入社後フォローアップ" data-en="Post-Hire Support" data-si="බඳවාගත් පසු සහාය">入社後フォローアップ</h4>
+        <p  data-ja="生活支援・定着支援で長期就労をサポート" data-en="Life & work support for long-term retention" data-si="දිගු කාලීන රඳවා ගැනීම සඳහා ජීවන සහාය">生活支援・定着支援で長期就労をサポート</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  TESTIMONIALS
+============================================================ -->
+<section class="testi">
+  <div class="inner">
+    <div class="sec-header" style="text-align:center;">
+      <div class="sec-tag" data-ja="お客様の声" data-en="Testimonials" data-si="ගනුදෙනුකාර අදහස්">お客様の声</div>
+      <h2 class="sec-title" data-ja="導入企業様からのご評価" data-en="What Our Clients Say" data-si="අපගේ ගනුදෙනුකාරයෝ පවසති">導入企業様からのご評価</h2>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text"
+           data-ja="スリランカ人エンジニアを3名採用しました。英語でのコミュニケーションも問題なく、技術力も非常に高くて驚きました。採用後のサポートも手厚く、大変助かっています。"
+           data-en="We hired 3 Sri Lankan engineers. Their English communication was seamless and their technical skills were impressive. Post-hire support has been excellent."
+           data-si="ශ්‍රී ලංකා ඉංජිනේරුවන් 3 දෙනෙකු බඳවා ගතිමු. ඉංග්‍රීසි සන්නිවේදනය පරිපූර්ණ වූ අතර තාක්ෂණික කුසලතා විශිෂ්ට විය.">スリランカ人エンジニアを3名採用しました。英語でのコミュニケーションも問題なく、技術力も非常に高くて驚きました。採用後のサポートも手厚く、大変助かっています。</p>
+        <div class="testi-author">
+          <div class="avatar">T</div>
+          <div>
+            <div class="author-name" data-ja="田中 太郎 様" data-en="Mr. Tanaka" data-si="ශ්‍රී. ටනකා">田中 太郎 様</div>
+            <div class="author-co"   data-ja="IT企業 / CTO"   data-en="IT Company / CTO" data-si="IT සමාගම / CTO">IT企業 / CTO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text"
+           data-ja="技能実習生としてスリランカ人を受け入れましたが、真面目でよく働いてくれます。日本語の習得も早く、他の国の実習生と比べても非常に優秀です。"
+           data-en="We accepted Sri Lankan technical intern trainees who are serious and hardworking. They pick up Japanese quickly and stand out among trainees from other countries."
+           data-si="ශ්‍රී ලංකා ශිල්ප පුහුණු ශ්‍රමිකයන් පිළිගත්තෙමු. ඔවුහු බැරෑරුම් ව ශ්‍රමය කරති. ජපාන ඉගෙනීම ද ඉක්මන් ය.">技能実習生としてスリランカ人を受け入れましたが、真面目でよく働いてくれます。日本語の習得も早く、他の国の実習生と比べても非常に優秀です。</p>
+        <div class="testi-author">
+          <div class="avatar">S</div>
+          <div>
+            <div class="author-name" data-ja="鈴木 花子 様" data-en="Ms. Suzuki" data-si="ශ්‍රීමතී. සූසූකි">鈴木 花子 様</div>
+            <div class="author-co"   data-ja="製造業 / 人事部長" data-en="Manufacturing / HR Director" data-si="නිෂ්පාදන / HR අධ්‍යක්ෂ">製造業 / 人事部長</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text"
+           data-ja="スリランカへの進出支援をお願いしました。現地のネットワークを活かした情報提供と、きめ細やかなサポートで、スムーズに現地法人を設立できました。"
+           data-en="We requested support for expanding into Sri Lanka. Their local network and detailed guidance helped us establish a local entity smoothly."
+           data-si="ශ්‍රී ලංකාවේ ව්‍යාපාර ස්ථාපනය සඳහා සහාය ඉල්ලා සිටියෙමු. ඔවුන්ගේ දේශීය ජාලකය නිසා සුමට ලෙස ස්ථාපනය කළෙමු.">スリランカへの進出支援をお願いしました。現地のネットワークを活かした情報提供と、きめ細やかなサポートで、スムーズに現地法人を設立できました。</p>
+        <div class="testi-author">
+          <div class="avatar">Y</div>
+          <div>
+            <div class="author-name" data-ja="山田 一郎 様" data-en="Mr. Yamada" data-si="ශ්‍රී. යමදා">山田 一郎 様</div>
+            <div class="author-co"   data-ja="商社 / 代表取締役" data-en="Trading Co. / CEO" data-si="වෙළෙඳ සමාගම / CEO">商社 / 代表取締役</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  CONTACT
+============================================================ -->
+<section class="contact" id="contact">
+  <div class="inner">
+    <div class="contact-grid">
+      <div>
+        <div class="sec-tag" data-ja="お問い合わせ" data-en="Contact Us" data-si="අප හා සම්බන්ධ වන්න">お問い合わせ</div>
+        <h2 class="sec-title" data-ja="まずは無料相談から" data-en="Start with a Free Consultation" data-si="නොමිලේ උපදේශනයකින් ආරම්භ කරන්න">まずは無料相談から</h2>
+        <p  data-ja="スリランカ人材についてのご質問・ご相談は何でもお気軽にご連絡ください。専門スタッフが丁寧にご対応いたします。"
+            data-en="Feel free to reach out with any questions about Sri Lankan talent. Our specialists will respond carefully and promptly."
+            data-si="ශ්‍රී ලංකා ශ්‍රමිකයන් ගැන ඕනෑම ප්‍රශ්නයක් අප හා සම්බන්ධ වන්න. විශේෂඥ කාර්ය මණ්ඩලය ඔබට ඉක්මනින් ප්‍රතිචාර දක්වනු ඇත.">スリランカ人材についてのご質問・ご相談は何でもお気軽にご連絡ください。専門スタッフが丁寧にご対応いたします。</p>
+
+        <div class="c-items">
+          <div class="c-item"><div class="c-item-icon">📧</div><span>info@srilanka-jinzai-center.jp</span></div>
+          <div class="c-item"><div class="c-item-icon">📞</div><span>03-XXXX-XXXX</span></div>
+          <div class="c-item">
+            <div class="c-item-icon">⏰</div>
+            <span data-ja="平日 9:00〜18:00" data-en="Weekdays 9:00–18:00 JST" data-si="සති දිනවල 9:00–18:00 JST">平日 9:00〜18:00</span>
+          </div>
+          <div class="c-item">
+            <div class="c-item-icon">📍</div>
+            <span data-ja="東京都〇〇区〇〇 1-2-3" data-en="1-2-3 XX, XX-ku, Tokyo" data-si="1-2-3 XX, XX-ku, ටෝකියෝ">東京都〇〇区〇〇 1-2-3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal">
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-ja="会社名 *" data-en="Company Name *" data-si="සමාගමේ නම *">会社名 *</label>
+              <input type="text" required placeholder="株式会社〇〇">
+            </div>
+            <div class="form-group">
+              <label data-ja="お名前 *" data-en="Your Name *" data-si="ඔබේ නම *">お名前 *</label>
+              <input type="text" required placeholder="山田 太郎">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-ja="メールアドレス *" data-en="Email *" data-si="ඊමේල් *">メールアドレス *</label>
+              <input type="email" required placeholder="info@company.co.jp">
+            </div>
+            <div class="form-group">
+              <label data-ja="電話番号" data-en="Phone" data-si="දුරකථනය">電話番号</label>
+              <input type="tel" placeholder="03-XXXX-XXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-ja="ご関心のあるサービス" data-en="Service of Interest" data-si="ඔබ කැමති සේවාව">ご関心のあるサービス</label>
+            <select>
+              <option value=""       data-ja="選択してください"    data-en="Please select"               data-si="තෝරන්න">選択してください</option>
+              <option value="it"     data-ja="IT高度人材紹介"      data-en="IT Professional Placement"   data-si="IT වෘත්තිකයන්">IT高度人材紹介</option>
+              <option value="intern" data-ja="技能実習生紹介"      data-en="Technical Intern Trainees"   data-si="ශිල්ප පුහුණු">技能実習生紹介</option>
+              <option value="skill"  data-ja="特定技能人材紹介"    data-en="Specified Skilled Workers"   data-si="නිශ්චිත කුසලතා">特定技能人材紹介</option>
+              <option value="biz"    data-ja="スリランカ進出支援"  data-en="Business Expansion Support"  data-si="ව්‍යාපාර ව්‍යාප්ති">スリランカ進出支援</option>
+              <option value="other"  data-ja="その他・複数"        data-en="Other / Multiple"            data-si="වෙනත්">その他・複数</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-ja="お問い合わせ内容" data-en="Message" data-si="පණිවිඩය">お問い合わせ内容</label>
+            <textarea placeholder="採用したい人数、時期、職種など詳しくご記入ください。"></textarea>
+          </div>
+          <button type="submit" class="btn-submit"
+                  data-ja="無料相談を申し込む →"
+                  data-en="Request Free Consultation →"
+                  data-si="නොමිලේ උපදේශනය ඉල්ලන්න →">無料相談を申し込む →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  FOOTER
+============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon">🌏</div>
+          <div>
+            <div class="logo-name" data-ja="セイロン・ブリッジ株式会社" data-en="Ceylon Bridge Co., Ltd." data-si="සීලෝන් බ්‍රිජ් සමාගම">セイロン・ブリッジ株式会社</div>
+            <div class="logo-sub">Ceylon Bridge Co., Ltd.</div>
+          </div>
+        </div>
+        <p data-ja="セイロン・ブリッジは、スリランカと日本をつなぐ人材紹介・ビジネス支援の専門企業です。優秀なスリランカ人材で、日本企業の成長をサポートします。"
+           data-en="Ceylon Bridge is a specialized staffing and business support company connecting Sri Lanka and Japan. We help Japanese businesses grow with excellent Sri Lankan talent."
+           data-si="Ceylon Bridge යනු ශ්‍රී ලංකාව සහ ජපානය සම්බන්ධ කරන විශේෂිත ශ්‍රම හා ව්‍යාපාර සහාය සමාගමකි.">セイロン・ブリッジは、スリランカと日本をつなぐ人材紹介・ビジネス支援の専門企業です。優秀なスリランカ人材で、日本企業の成長をサポートします。</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-ja="サービス" data-en="Services" data-si="සේවාවන්">サービス</h4>
+        <ul>
+          <li><a href="#services" data-ja="IT高度人材紹介"     data-en="IT Professional Placement"  data-si="IT වෘත්තිකයන්">IT高度人材紹介</a></li>
+          <li><a href="#services" data-ja="技能実習生紹介"     data-en="Technical Intern Trainees"  data-si="ශිල්ප පුහුණු">技能実習生紹介</a></li>
+          <li><a href="#services" data-ja="特定技能人材紹介"   data-en="Specified Skilled Workers"  data-si="නිශ්චිත කුසලතා">特定技能人材紹介</a></li>
+          <li><a href="#services" data-ja="スリランカ進出支援" data-en="Business Expansion"         data-si="ව්‍යාපාර ව්‍යාප්ති">スリランカ進出支援</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-ja="情報" data-en="Information" data-si="තොරතුරු">情報</h4>
+        <ul>
+          <li><a href="#why"     data-ja="なぜスリランカ？" data-en="Why Sri Lanka?"  data-si="ඇයි ශ්‍රී ලංකාව?">なぜスリランカ？</a></li>
+          <li><a href="#process" data-ja="導入の流れ"      data-en="How It Works"    data-si="ක්‍රියාවලිය">導入の流れ</a></li>
+          <li><a href="#"        data-ja="よくある質問"    data-en="FAQ"             data-si="නිතර ප්‍රශ්න">よくある質問</a></li>
+          <li><a href="#"        data-ja="会社概要"        data-en="About Us"        data-si="අප ගැන">会社概要</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-ja="お問い合わせ" data-en="Contact" data-si="සම්බන්ධ වන්න">お問い合わせ</h4>
+        <ul>
+          <li><a href="mailto:info@srilanka-jinzai-center.jp">info@srilanka-jinzai-center.jp</a></li>
+          <li><a href="tel:03-XXXX-XXXX">03-XXXX-XXXX</a></li>
+          <li><a href="#contact" data-ja="無料相談申し込み"       data-en="Free Consultation"   data-si="නොමිලේ උපදේශනය">無料相談申し込み</a></li>
+          <li><a href="#"        data-ja="プライバシーポリシー"   data-en="Privacy Policy"      data-si="පෞද්ගලිකත්ව ප්‍රතිපත්තිය">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 セイロン・ブリッジ株式会社 | Ceylon Bridge Co., Ltd.
+        <span data-ja="All Rights Reserved." data-en="All Rights Reserved." data-si="සියලු හිමිකම් ඇවිරිණි.">All Rights Reserved.</span>
+      </div>
+      <div>🇱🇰 × 🇯🇵</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+  JAVASCRIPT
+============================================================ -->
+<script>
+  // ─── Language Switching ───────────────────────────────────────
+  let currentLang = 'ja';
+
+  function setLang(lang, btnEl) {
+    currentLang = lang;
+
+    // Swap text for all labelled elements
+    document.querySelectorAll('[data-ja]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (!text) return;
+      if (el.tagName === 'OPTION') {
+        el.textContent = text;
+      } else if (el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA') {
+        el.innerHTML = text;
+      }
+    });
+
+    // Active button highlight
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    btnEl.classList.add('active');
+
+    // <html lang>
+    document.documentElement.lang = lang;
+
+    // Page title
+    const titles = {
+      ja: 'セイロン・ブリッジ株式会社 | IT高度人材・技能実習・特定技能・スリランカ進出支援',
+      en: 'Ceylon Bridge Co., Ltd. | IT Professionals, Interns & Business Expansion in Sri Lanka',
+      si: 'සීලෝන් බ්‍රිජ් සමාගම | IT වෘත්තිකයන්, ශිල්ප පුහුණු, ව්‍යාපාර ව්‍යාප්ති'
+    };
+    document.title = titles[lang];
+  }
+
+  // ─── Mobile Nav ───────────────────────────────────────────────
+  function toggleMob() {
+    document.getElementById('mobNav').classList.toggle('open');
+  }
+
+  // ─── Form Submit ──────────────────────────────────────────────
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msgs = {
+      ja: 'お問い合わせを受け付けました。担当者よりご連絡差し上げます。',
+      en: 'Thank you for your inquiry. Our team will contact you shortly.',
+      si: 'ඔබගේ ඉල්ලීම ලැබිගත්තෙමු. කාර්ය මණ්ඩලය ඉක්මනින් සම්බන්ධ කර ගනු ඇත.'
+    };
+    alert(msgs[currentLang]);
+    e.target.reset();
+  }
+
+  // ─── Smooth Scroll ────────────────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + scrollY - 76, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ─── Scroll Reveal ────────────────────────────────────────────
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('visible');
+        revealObs.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    revealObs.observe(el);
+  });
+
+  // ─── Counter Animation ────────────────────────────────────────
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const numEl = en.target.querySelector('.stat-num');
+      if (!numEl || numEl.dataset.done) return;
+      numEl.dataset.done = '1';
+      const target   = +numEl.dataset.target;
+      const supHTML  = numEl.querySelector('sup') ? numEl.querySelector('sup').outerHTML : '';
+      let current    = 0;
+      const step     = target / 60;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        numEl.innerHTML = Math.floor(current) + supHTML;
+        if (current >= target) clearInterval(timer);
+      }, 16);
+      counterObs.unobserve(en.target);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stats-bar-inner > div').forEach(el => counterObs.observe(el));
+</script>
+
+</body>
+</html>
