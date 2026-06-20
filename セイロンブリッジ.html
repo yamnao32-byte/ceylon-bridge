@@ -327,10 +327,25 @@
       padding: 28px 44px;
       text-align: center;
       width: 260px;
-      transition: transform .3s;
+      transition: transform .3s, background .3s, border-color .3s;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .flag-card:hover { transform: scale(1.04); }
+    .flag-card:hover { transform: scale(1.04); background: rgba(255,255,255,.18); }
+
+    .flag-card.lang-active {
+      border-color: rgba(255,255,255,.7);
+      background: rgba(255,255,255,.22);
+      transform: scale(1.04);
+    }
+
+    .flag-switch-hint {
+      font-size: 10px;
+      color: rgba(255,255,255,.4);
+      margin-top: 6px;
+      letter-spacing: .04em;
+    }
 
     .flag-emoji { font-size: 64px; margin-bottom: 10px; display: block; }
 
@@ -903,10 +918,10 @@
       <div class="logo-icon">🌏</div>
       <div>
         <div class="logo-name"
-          data-ja="セイロン・ブリッジ株式会社"
-          data-en="Ceylon Bridge Co., Ltd."
-          data-si="සීලෝන් බ්‍රිජ් සමාගම">セイロン・ブリッジ株式会社</div>
-        <div class="logo-sub">Ceylon Bridge Co., Ltd.</div>
+          data-ja="セイロンブリッジサービス"
+          data-en="Ceylon Bridge Services"
+          data-si="සීලෝන් බ්‍රිජ් සමාගම">セイロンブリッジサービス</div>
+        <div class="logo-sub">Ceylon Bridge Services</div>
       </div>
     </a>
 
@@ -919,10 +934,10 @@
     </nav>
 
     <div class="header-right">
-      <div class="lang-switcher">
-        <button class="lang-btn active" onclick="setLang('ja',this)">JP</button>
-        <button class="lang-btn"        onclick="setLang('en',this)">EN</button>
-        <button class="lang-btn"        onclick="setLang('si',this)">සිං</button>
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn active" data-lang="ja">JP</button>
+        <button class="lang-btn"        data-lang="en">EN</button>
+        <button class="lang-btn"        data-lang="si">සිං</button>
       </div>
       <button class="hamburger" onclick="toggleMob()" aria-label="メニュー">
         <span></span><span></span><span></span>
@@ -977,16 +992,25 @@
 
     <div class="hero-visual">
       <div class="flags-wrap">
-        <div class="flag-card">
+        <div class="flag-card lang-active" data-lang="si">
           <span class="flag-emoji">🇱🇰</span>
           <div class="flag-label">Sri Lanka</div>
           <div class="flag-sublabel">ශ්‍රී ලංකාව · スリランカ</div>
+          <div class="flag-switch-hint">▶ සිංහල</div>
         </div>
         <div class="bridge-arrow">⇅</div>
-        <div class="flag-card">
+        <div class="flag-card" data-lang="en">
+          <span class="flag-emoji">🇬🇧</span>
+          <div class="flag-label">English</div>
+          <div class="flag-sublabel">EN · International</div>
+          <div class="flag-switch-hint">▶ English</div>
+        </div>
+        <div class="bridge-arrow">⇅</div>
+        <div class="flag-card" data-lang="ja">
           <span class="flag-emoji">🇯🇵</span>
           <div class="flag-label">Japan</div>
           <div class="flag-sublabel">日本 · Nihon</div>
+          <div class="flag-switch-hint">▶ 日本語</div>
         </div>
       </div>
     </div>
@@ -1324,7 +1348,7 @@
       </div>
 
       <div class="contact-form-wrap reveal">
-        <form onsubmit="handleSubmit(event)">
+        <form action="https://formspree.io/f/xkoadary" method="POST" onsubmit="handleSubmit(event)">
           <div class="form-row">
             <div class="form-group">
               <label data-ja="会社名 *" data-en="Company Name *" data-si="සමාගමේ නම *">会社名 *</label>
@@ -1380,8 +1404,8 @@
         <div class="logo">
           <div class="logo-icon">🌏</div>
           <div>
-            <div class="logo-name" data-ja="セイロン・ブリッジ株式会社" data-en="Ceylon Bridge Co., Ltd." data-si="සීලෝන් බ්‍රිජ් සමාගම">セイロン・ブリッジ株式会社</div>
-            <div class="logo-sub">Ceylon Bridge Co., Ltd.</div>
+            <div class="logo-name" data-ja="セイロンブリッジサービス" data-en="Ceylon Bridge Services" data-si="සීලෝන් බ්‍රිජ් සමාගම">セイロンブリッジサービス</div>
+            <div class="logo-sub">Ceylon Bridge Services</div>
           </div>
         </div>
         <p data-ja="セイロン・ブリッジは、スリランカと日本をつなぐ人材紹介・ビジネス支援の専門企業です。優秀なスリランカ人材で、日本企業の成長をサポートします。"
@@ -1421,7 +1445,7 @@
     </div>
 
     <div class="footer-bottom">
-      <div>© 2026 セイロン・ブリッジ株式会社 | Ceylon Bridge Co., Ltd.
+      <div>© 2026 セイロンブリッジサービス | Ceylon Bridge Services
         <span data-ja="All Rights Reserved." data-en="All Rights Reserved." data-si="සියලු හිමිකම් ඇවිරිණි.">All Rights Reserved.</span>
       </div>
       <div>🇱🇰 × 🇯🇵</div>
@@ -1436,10 +1460,9 @@
   // ─── Language Switching ───────────────────────────────────────
   let currentLang = 'ja';
 
-  function setLang(lang, btnEl) {
+  function setLang(lang) {
     currentLang = lang;
 
-    // Swap text for all labelled elements
     document.querySelectorAll('[data-ja]').forEach(el => {
       const text = el.getAttribute('data-' + lang);
       if (!text) return;
@@ -1450,20 +1473,51 @@
       }
     });
 
-    // Active button highlight
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    btnEl.classList.add('active');
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
 
-    // <html lang>
     document.documentElement.lang = lang;
 
-    // Page title
     const titles = {
-      ja: 'セイロン・ブリッジ株式会社 | IT高度人材・技能実習・特定技能・スリランカ進出支援',
-      en: 'Ceylon Bridge Co., Ltd. | IT Professionals, Interns & Business Expansion in Sri Lanka',
-      si: 'සීලෝන් බ්‍රිජ් සමාගම | IT වෘත්තිකයන්, ශිල්ප පුහුණු, ව්‍යාපාර ව්‍යාප්ති'
+      ja: 'セイロンブリッジサービス | IT高度人材・技能実習・特定技能・スリランカ進出支援',
+      en: 'Ceylon Bridge Services | IT Professionals, Interns & Business Expansion in Sri Lanka',
+      si: 'සීලෝන් බ්‍රිජ් සේවා | IT වෘත්තිකයන්, ශිල්ප පුහුණු, ව්‍යාපාර ව්‍යාප්ති'
     };
-    document.title = titles[lang];
+    document.title = titles[lang] || titles.ja;
+
+    localStorage.setItem('lang', lang);
+  }
+
+  function updateFlagCards(lang) {
+    document.querySelectorAll('.flag-card[data-lang]').forEach(card => {
+      card.classList.toggle('lang-active', card.dataset.lang === lang);
+    });
+  }
+
+  const _origSetLang = setLang;
+  setLang = function(lang) {
+    _origSetLang(lang);
+    updateFlagCards(lang);
+  };
+
+  document.getElementById('langSwitcher').addEventListener('click', function(e) {
+    const btn = e.target.closest('.lang-btn');
+    if (btn && btn.dataset.lang) setLang(btn.dataset.lang);
+  });
+
+  document.querySelectorAll('.flag-card[data-lang]').forEach(card => {
+    card.addEventListener('click', function() {
+      setLang(this.dataset.lang);
+    });
+  });
+
+  // 前回の言語設定を復元
+  const savedLang = localStorage.getItem('lang');
+  if (savedLang && savedLang !== 'ja') {
+    setLang(savedLang);
+  } else {
+    updateFlagCards('ja');
   }
 
   // ─── Mobile Nav ───────────────────────────────────────────────
@@ -1472,15 +1526,39 @@
   }
 
   // ─── Form Submit ──────────────────────────────────────────────
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const msgs = {
-      ja: 'お問い合わせを受け付けました。担当者よりご連絡差し上げます。',
-      en: 'Thank you for your inquiry. Our team will contact you shortly.',
-      si: 'ඔබගේ ඉල්ලීම ලැබිගත්තෙමු. කාර්ය මණ්ඩලය ඉක්මනින් සම්බන්ධ කර ගනු ඇත.'
-    };
-    alert(msgs[currentLang]);
-    e.target.reset();
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中...';
+
+    try {
+      const res = await fetch('https://formspree.io/f/xkoadary', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        const msgs = {
+          ja: 'お問い合わせを受け付けました。担当者よりご連絡差し上げます。',
+          en: 'Thank you for your inquiry. Our team will contact you shortly.',
+          si: 'ඔබගේ ඉල්ලීම ලැබිගත්තෙමු. කාර්ය මණ්ඩලය ඉක්මනින් සම්බන්ධ කර ගනු ඇත.'
+        };
+        alert(msgs[currentLang] || msgs.ja);
+        form.reset();
+      } else {
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      }
+    } catch {
+      alert('通信エラーが発生しました。インターネット接続を確認してください。');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
   }
 
   // ─── Smooth Scroll ────────────────────────────────────────────
